@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/autojob?characterEncoding=utf-8&allowMultiQueries=true&&useAffectedRows=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 12345678
+
+autojob:
+  password:
+    encrypt: ${AUTOJOB_PASSWORD_ENCRYPT} #??????
+  rsa:
+    public_key: ${AUTOJOB_RSA_PUBLIC_KEY}
+    private_key: ${AUTOJOB_RSA_PRIVATE_KEY}
