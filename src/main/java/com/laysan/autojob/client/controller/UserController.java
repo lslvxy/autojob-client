@@ -4,9 +4,11 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
-import com.laysan.autojob.client.constants.AccountType;
 import com.laysan.autojob.client.dto.TypeDTO;
+import com.laysan.autojob.client.entity.Menu;
 import com.laysan.autojob.client.entity.User;
+import com.laysan.autojob.client.repository.MenuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,18 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("user")
 public class UserController extends BaseController {
+    @Autowired
+    private MenuRepository menuRepository;
 
     @GetMapping("menu")
     public MultiResponse<TypeDTO> menu(HttpServletRequest request) {
-        AccountType[] values = AccountType.values();
-        List<TypeDTO> list = Arrays.stream(values).map(at -> new TypeDTO(at.getCode(), at.getDesc(), at.getIcon())).collect(Collectors.toList());
+        List<Menu> values = menuRepository.findAll();
+        List<TypeDTO> list = values.stream().map(at -> new TypeDTO(at.getType(), at.getName(), at.getIcon())).collect(
+                Collectors.toList());
         return MultiResponse.of(list);
     }
 

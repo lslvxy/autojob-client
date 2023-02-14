@@ -7,9 +7,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/autojob?characterEncoding=utf-8&allowMultiQueries=true&&useAffectedRows=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 12345678
+    url: ${AUTOJOB_DB_URL}
+    username: ${AUTOJOB_DB_USERNAME}
+    password: ${AUTOJOB_DB_PASSWORD}
 
 autojob:
   password:
